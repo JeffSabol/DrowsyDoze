@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsxnj061aof00"]
+
+[ext_resource type="Texture2D" uid="uid://b1wgkuwrvwf08" path="res://Assets/Background.png" id="1_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://bcb3oih7ow4c" path="res://Assets/Lantern.png" id="2_kry3j"]
+[ext_resource type="Texture2D" uid="uid://da656p6ovdtns" path="res://Assets/SleepingMole.png" id="3_21xkr"]
+[ext_resource type="Texture2D" uid="uid://dudlklsf8ybxp" path="res://Assets/Sign.png" id="4_6bp64"]
+
+[node name="Main" type="Node2D"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -20.0
+offset_right = 18.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(11.25, 11.25)
+
+[node name="Background" type="TextureRect" parent="."]
+offset_top = -1.0
+offset_right = 64.0
+offset_bottom = 63.0
+scale = Vector2(11.25, 11.25)
+texture = ExtResource("1_jjvhh")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(167, 702)
+energy = 0.44
+range_z_min = 128
+max_distance = 3395.0
+
+[node name="Lantern" type="Sprite2D" parent="."]
+position = Vector2(158, 485)
+scale = Vector2(11.25, 11.25)
+texture = ExtResource("2_kry3j")
+
+[node name="Mole" type="Sprite2D" parent="."]
+position = Vector2(417, 459)
+scale = Vector2(11.25, 11.25)
+texture = ExtResource("3_21xkr")
+
+[node name="Sign" type="Sprite2D" parent="."]
+position = Vector2(380, 160)
+scale = Vector2(11.25, 11.25)
+texture = ExtResource("4_6bp64")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(360, 360)
