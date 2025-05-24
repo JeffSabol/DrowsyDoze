@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsxnj061aof00"]
+[gd_scene load_steps=6 format=3 uid="uid://dsxnj061aof00"]
 
 [ext_resource type="Texture2D" uid="uid://b1wgkuwrvwf08" path="res://Assets/Background.png" id="1_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://bcb3oih7ow4c" path="res://Assets/Lantern.png" id="2_kry3j"]
 [ext_resource type="Texture2D" uid="uid://da656p6ovdtns" path="res://Assets/SleepingMole.png" id="3_21xkr"]
 [ext_resource type="Texture2D" uid="uid://dudlklsf8ybxp" path="res://Assets/Sign.png" id="4_6bp64"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jjvhh"]
+font_size = 8
 
 [node name="Main" type="Node2D"]
 
@@ -22,18 +25,22 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(11.25, 11.25)
 
+[node name="ClickCounter" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 18.6667
+offset_top = 3.91111
+offset_right = 160.667
+offset_bottom = 52.9111
+text = "4
+i don't see nything"
+label_settings = SubResource("LabelSettings_jjvhh")
+
 [node name="Background" type="TextureRect" parent="."]
 offset_top = -1.0
 offset_right = 64.0
 offset_bottom = 63.0
 scale = Vector2(11.25, 11.25)
 texture = ExtResource("1_jjvhh")
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-position = Vector2(167, 702)
-energy = 0.44
-range_z_min = 128
-max_distance = 3395.0
 
 [node name="Lantern" type="Sprite2D" parent="."]
 position = Vector2(158, 485)
@@ -52,3 +59,7 @@ texture = ExtResource("4_6bp64")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(360, 360)
+
+[node name="LanternClick" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Sign2" type="AudioStreamPlayer2D" parent="."]
