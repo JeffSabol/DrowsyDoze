@@ -35,10 +35,9 @@ var milestones := {
 
 
 func _ready():
-	reset_clicks()
+	#reset_clicks()
 	load_game()
 	hide_all_sprites()
-	preload_loading_bar_textures()
 	update_click_counter()
 	
 	scoreboard_height = scoreboard.get_rect().size.y
@@ -57,11 +56,6 @@ func _input(event):
 func update_click_counter():
 	$Sprite2/Sign/ClickCounter.text = str(total_clicks)
 	$Sprite2/Sign/ClickCounter.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-
-func preload_loading_bar_textures():
-	for i in 22:
-		var path = "res://assets/LoadingBars/LoadingBar%d.png" % i
-		loading_bar_frames.append(load(path))
 
 func check_rewards():
 	upgrade_button.visible = get_next_affordable_milestone() != -1
