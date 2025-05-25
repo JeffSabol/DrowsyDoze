@@ -3,7 +3,6 @@ extends Node2D
 
 @onready var scoreboard = $Sprite2/Sign
 @onready var hover_zone = $Sprite2/HoverZone
-@onready var xp_bar = $XPBar
 @onready var upgrade_button = $UpgradeButton
 var loading_bar_frames: Array[Texture2D] = []
 var scoreboard_height: float = 0.0
@@ -19,20 +18,21 @@ var unlock_thresholds := [10, 30, 60, 110, 200, 360, 650, 1150, 2000, 3600, 6500
 var unlocked_milestones: Array = []
 
 # Define custom milestone behavior
-var milestone_actions := {
-	10: func(): show_scoreboard_temporarily(),
-	30: func(): fade_in_sprite("Sprite1"),
-	60: func(): print("TODO bubbles +1 point per pop"),
-	110: func(): print("TODO glowing starts fill the cave background"),
-	200: func(): print("TODO sleeping cap"),
-	360: func(): print("TOOD"),
-	650: func(): print("TODO glowing starts fill the cave"),
-	1150: func(): print("TODO sleep talking"),
-	2000: func(): print("TOOD"),
-	3600: func(): print("TOOD"),
-	6500: func(): print("TOOD"),
-	11000: func(): print("TOOD"),
+var milestones := {
+	10: { "name": "Scoreboard", "action": func(): show_scoreboard_temporarily() },
+	30: { "name": "Lantern", "action": func(): fade_in_sprite("Sprite1") },
+	60: { "name": "Bubbles", "action": func(): print("TODO bubbles +1 point per pop") },
+	110: { "name": "Glowing stars fill cave background", "action": func(): print("TODO glowing starts fill the cave background") },
+	200: { "name": "Sleeping cap", "action": func(): print("TODO sleeping cap") },
+	360: { "name": "???", "action": func(): print("TODO") },
+	650: { "name": "More stars", "action": func(): print("TODO glowing starts fill the cave") },
+	1150: { "name": "Sleep talking", "action": func(): print("TODO sleep talking") },
+	2000: { "name": "???", "action": func(): print("TODO") },
+	3600: { "name": "???", "action": func(): print("TODO") },
+	6500: { "name": "???", "action": func(): print("TODO") },
+	11000: { "name": "???", "action": func(): print("TODO") }
 }
+
 
 func _ready():
 	reset_clicks()
@@ -57,7 +57,6 @@ func _input(event):
 func update_click_counter():
 	$Sprite2/Sign/ClickCounter.text = str(total_clicks)
 	$Sprite2/Sign/ClickCounter.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	update_xp_gauge()
 
 func preload_loading_bar_textures():
 	for i in 22:
@@ -65,12 +64,7 @@ func preload_loading_bar_textures():
 		loading_bar_frames.append(load(path))
 
 func check_rewards():
-	var has_available_reward = false
-	for milestone in unlock_thresholds:
-		if total_clicks >= milestone and milestone not in unlocked_milestones:
-			has_available_reward = true
-			break
-	upgrade_button.visible = has_available_reward
+	upgrade_button.visible = get_next_affordable_milestone() != -1
 
 func fade_in_sprite(node_path: String):
 	var sprite = get_node_or_null(node_path)
@@ -87,33 +81,20 @@ func flicker_light(node_path: String):
 		tween.tween_property(light, "energy", 0.0, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(light, "energy", 1.0, 0.1)
 
-func update_xp_gauge():
-	# Necessary to prevent error: Invalid access of index '0' on a base object of type: 'Array[Texture2D]'.
-	if loading_bar_frames.size() < 22:
-		print("Loading bar textures not ready yet.")
-		return
-
-	var next = get_next_milestone()
-	var prev = get_previous_milestone()
-	var range = float(next - prev)
-	var progress = float(total_clicks - prev) / range
-	progress = clamp(progress, 0.0, 1.0)
-	var filled = int(progress * 20)
-	xp_bar.texture = loading_bar_frames[filled]
-
-func get_next_milestone() -> int:
-	for milestone in unlock_thresholds:
-		if total_clicks < milestone:
-			return milestone
-	return unlock_thresholds[-1]
-
-func get_previous_milestone() -> int:
+func get_previous_redeemed_milestone() -> int:
 	var prev = 0
 	for milestone in unlock_thresholds:
-		if total_clicks < milestone:
-			return prev
-		prev = milestone
+		if milestone in unlocked_milestones:
+			prev = milestone
+		else:
+			break
 	return prev
+
+func get_next_unlocked_milestone() -> int:
+	for milestone in unlock_thresholds:
+		if milestone not in unlocked_milestones:
+			return milestone
+	return unlock_thresholds[-1]  # All milestones done
 
 func hide_all_sprites():
 	for i in range(unlock_thresholds.size()):
@@ -192,6 +173,14 @@ func show_scoreboard_temporarily():
 		slide_scoreboard(-scoreboard_height)
 	is_showing_due_to_milestone = false
 	
+func get_next_affordable_milestone() -> int:
+	var sorted_keys = milestones.keys()
+	sorted_keys.sort()
+	for milestone in sorted_keys:
+		if total_clicks >= milestone and milestone not in unlocked_milestones:
+			return milestone
+	return -1
+
 func _on_hover_zone_mouse_entered():
 	if scoreboard_unlocked:
 		is_hovering = true
@@ -204,17 +193,36 @@ func _on_hover_zone_mouse_exited():
 			slide_scoreboard(-scoreboard_height)
 
 func _on_upgrade_button_button_up():
-	for milestone in unlock_thresholds:
-		if total_clicks >= milestone and milestone not in unlocked_milestones:
-			total_clicks -= milestone
-			unlocked_milestones.append(milestone)
-			update_click_counter()
-			save_game()
-			check_rewards()
-			if milestone_actions.has(milestone):
-				milestone_actions[milestone].call()
-			break  # Only redeem one milestone per click
+	var milestone = get_next_affordable_milestone()
+	if milestone == -1:
+		return
 
+	total_clicks -= milestone
+	unlocked_milestones.append(milestone)
+	update_click_counter()
+	save_game()
+	check_rewards()
+
+	var action = milestones[milestone].get("action")
+	if action:
+		action.call()
 
 func _on_upgrade_button_mouse_entered():
-	$UpgradeButton.tooltip_text = "Niggus"
+	var sorted_keys = milestones.keys()
+	sorted_keys.sort()
+
+	for milestone in sorted_keys:
+		if milestone not in unlocked_milestones and total_clicks >= milestone:
+			var name = milestones[milestone].get("name", "???")
+			$UpgradeButton.tooltip_text = "Unlock: %s\nCost: %d clicks" % [name, milestone]
+			return
+
+	# If none are affordable, show the next locked one (even if too expensive)
+	for milestone in sorted_keys:
+		if milestone not in unlocked_milestones:
+			var remaining = milestone - total_clicks
+			var name = milestones[milestone].get("name", "???")
+			$UpgradeButton.tooltip_text = "Next: %s\nCost: %d clicks (%d more needed)" % [name, milestone, remaining]
+			return
+
+	$UpgradeButton.tooltip_text = "All upgrades unlocked"

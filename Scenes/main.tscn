@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dsxnj061aof00"]
+[gd_scene load_steps=21 format=3 uid="uid://dsxnj061aof00"]
 
 [ext_resource type="Script" uid="uid://cysbs8pyex71p" path="res://Scenes/main.gd" id="1_344ge"]
 [ext_resource type="Texture2D" uid="uid://b1wgkuwrvwf08" path="res://Assets/Background.png" id="1_jjvhh"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://ci45rx7vbgyy3" path="res://Assets/UpgradeArrowPressed.png" id="12_jkdf5"]
 [ext_resource type="Texture2D" uid="uid://jsvmwlhllii8" path="res://Assets/UpgradeArrowHover.png" id="13_wsu2k"]
 [ext_resource type="Texture2D" uid="uid://l3sg5vjjhg1v" path="res://Assets/UpgradeArrowDisabled.png" id="14_k12tt"]
-[ext_resource type="Texture2D" uid="uid://cnkpb3dw2qxyu" path="res://Assets/LoadingBars/LoadingBar0.png" id="15_wsu2k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hptm8"]
 atlas = ExtResource("3_ynf5e")
@@ -175,11 +174,6 @@ texture_normal = ExtResource("11_d1ilt")
 texture_pressed = ExtResource("12_jkdf5")
 texture_hover = ExtResource("13_wsu2k")
 texture_disabled = ExtResource("14_k12tt")
-
-[node name="XPBar" type="Sprite2D" parent="."]
-position = Vector2(528, 615)
-scale = Vector2(5.5, 5.5)
-texture = ExtResource("15_wsu2k")
 
 [connection signal="mouse_entered" from="Sprite2/HoverZone" to="." method="_on_hover_zone_mouse_entered"]
 [connection signal="mouse_exited" from="Sprite2/HoverZone" to="." method="_on_hover_zone_mouse_exited"]
