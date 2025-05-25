@@ -10,6 +10,7 @@ var scoreboard_height: float = 0.0
 var tween: Tween
 var is_hovering = false
 var is_showing_due_to_milestone = false
+var scoreboard_unlocked := false
 
 
 var total_clicks: int = 0
@@ -180,7 +181,8 @@ func slide_scoreboard(to_y: float, duration := 0.5):
 func show_scoreboard_temporarily():
 	if is_showing_due_to_milestone:
 		return
-
+	
+	scoreboard_unlocked = true
 	is_showing_due_to_milestone = true
 	slide_scoreboard(22.0)
 
@@ -191,13 +193,15 @@ func show_scoreboard_temporarily():
 	is_showing_due_to_milestone = false
 	
 func _on_hover_zone_mouse_entered():
-	is_hovering = true
-	slide_scoreboard(22.0)
+	if scoreboard_unlocked:
+		is_hovering = true
+		slide_scoreboard(22.0)
 
 func _on_hover_zone_mouse_exited():
-	is_hovering = false
-	if not is_showing_due_to_milestone:
-		slide_scoreboard(-scoreboard_height)
+	if scoreboard_unlocked:
+		is_hovering = false
+		if not is_showing_due_to_milestone:
+			slide_scoreboard(-scoreboard_height)
 
 func _on_upgrade_button_button_up():
 	for milestone in unlock_thresholds:
@@ -210,3 +214,7 @@ func _on_upgrade_button_button_up():
 			if milestone_actions.has(milestone):
 				milestone_actions[milestone].call()
 			break  # Only redeem one milestone per click
+
+
+func _on_upgrade_button_mouse_entered():
+	$UpgradeButton.tooltip_text = "Niggus"
