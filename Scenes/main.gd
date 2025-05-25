@@ -20,8 +20,8 @@ var unlocked_milestones: Array = []
 # Define custom milestone behavior
 var milestones := {
 	10: { "name": "Scoreboard", "action": func(): show_scoreboard_temporarily() },
-	30: { "name": "Lantern", "action": func(): fade_in_sprite("Sprite1") },
-	60: { "name": "Bubbles", "action": func(): print("TODO bubbles +1 point per pop") },
+	30: { "name": "Lantern", "action": func(): fade_in_sprite("Sprite1")},
+	60: { "name": "Bubbles", "action": func(): bubble_handling() },
 	110: { "name": "Glowing stars fill cave background", "action": func(): print("TODO glowing starts fill the cave background") },
 	200: { "name": "Sleeping cap", "action": func(): print("TODO sleeping cap") },
 	360: { "name": "???", "action": func(): print("TODO") },
@@ -233,3 +233,13 @@ func play_random_lantern_sound():
 	if stream:
 		$LanternSound.stream = stream
 		$LanternSound.play()
+
+func bubble_handling():
+	fade_in_sprite("Bubble")
+	$Bubble.play("default")
+
+func _on_bubble_frame_changed():
+	if $Bubble.frame == 18:
+		show_plus_one($Bubble.global_position)
+		total_clicks += 1
+		update_click_counter()
