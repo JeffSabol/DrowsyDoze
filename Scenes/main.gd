@@ -3,6 +3,8 @@ extends Node2D
 
 @onready var scoreboard = $Sprite2/Sign
 @onready var hover_zone = $Sprite2/HoverZone
+@onready var xp_bar = $XPBar
+var loading_bar_frames: Array[Texture2D] = []
 var scoreboard_height: float = 0.0
 var tween: Tween
 var is_hovering = false
@@ -11,15 +13,14 @@ var is_showing_due_to_milestone = false
 
 var total_clicks: int = 0
 var save_file_path := "user://save_data.json"
-var unlock_thresholds := [5, 15, 30, 60, 110, 200, 360, 650, 1150, 2000, 3600, 6500, 11000]
+var unlock_thresholds := [10, 30, 60, 110, 200, 360, 650, 1150, 2000, 3600, 6500, 11000]
 var unlocked_milestones: Array = []
 
 # Define custom milestone behavior
 var milestone_actions := {
-	5: func(): print("TODO +1 for each click"),
-	15: func(): fade_in_sprite("Sprite1"),
-	30: func(): show_scoreboard_temporarily(),
-	60: func(): flicker_light("LanternRed"),
+	10: func(): show_scoreboard_temporarily(),
+	30: func(): fade_in_sprite("Sprite1"),
+	60: func(): print("TOOD"),
 	110: func(): print("TOOD"),
 	200: func(): print("TOOD"),
 	360: func(): print("TOOD"),
@@ -34,8 +35,9 @@ var milestone_actions := {
 func _ready():
 	reset_clicks()
 	load_game()
-	update_click_counter()
 	hide_all_sprites()
+	preload_loading_bar_textures()
+	update_click_counter()
 	
 	scoreboard_height = scoreboard.get_rect().size.y
 	scoreboard.position.y = -scoreboard_height
@@ -53,7 +55,12 @@ func _input(event):
 func update_click_counter():
 	$Sprite2/Sign/ClickCounter.text = str(total_clicks)
 	$Sprite2/Sign/ClickCounter.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	print_xp_gauge()
+	update_xp_gauge()
+
+func preload_loading_bar_textures():
+	for i in 22:
+		var path = "res://assets/LoadingBars/LoadingBar%d.png" % i
+		loading_bar_frames.append(load(path))
 
 func check_rewards():
 	for milestone in unlock_thresholds:
@@ -78,21 +85,32 @@ func flicker_light(node_path: String):
 		tween.tween_property(light, "energy", 0.0, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(light, "energy", 1.0, 0.1)
 
-func print_xp_gauge():
+func update_xp_gauge():
+	if loading_bar_frames.size() < 22:
+		print("Loading bar textures not ready yet.")
+		return
+
 	var next = get_next_milestone()
-	var progress = float(total_clicks) / next
+	var prev = get_previous_milestone()
+	var range = float(next - prev)
+	var progress = float(total_clicks - prev) / range
+	progress = clamp(progress, 0.0, 1.0)
 	var filled = int(progress * 20)
-	var bar = "|"
-	for i in range(20):
-		bar += "█" if i < filled else "-"
-	bar += "|"
-	print("Clicks: %d / %d %s" % [total_clicks, next, bar])
+	xp_bar.texture = loading_bar_frames[filled]
 
 func get_next_milestone() -> int:
 	for milestone in unlock_thresholds:
 		if total_clicks < milestone:
 			return milestone
 	return unlock_thresholds[-1]
+
+func get_previous_milestone() -> int:
+	var prev = 0
+	for milestone in unlock_thresholds:
+		if total_clicks < milestone:
+			return prev
+		prev = milestone
+	return prev
 
 func hide_all_sprites():
 	for i in range(unlock_thresholds.size()):
