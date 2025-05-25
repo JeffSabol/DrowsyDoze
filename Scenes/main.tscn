@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsxnj061aof00"]
+[gd_scene load_steps=19 format=3 uid="uid://dsxnj061aof00"]
 
 [ext_resource type="Script" uid="uid://cysbs8pyex71p" path="res://Scenes/main.gd" id="1_344ge"]
 [ext_resource type="Texture2D" uid="uid://b1wgkuwrvwf08" path="res://Assets/Background.png" id="1_jjvhh"]
@@ -8,7 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://dudlklsf8ybxp" path="res://Assets/Sign.png" id="4_6bp64"]
 [ext_resource type="Script" uid="uid://mwjydsyyb4dd" path="res://Scenes/lantern.gd" id="4_344ge"]
 [ext_resource type="FontFile" uid="uid://cvmqttiopvx87" path="res://Assets/pzim3x5.ttf" id="7_6bp64"]
+[ext_resource type="Script" uid="uid://doljrkvmp46m5" path="res://Scenes/area_2d.gd" id="7_hptm8"]
 [ext_resource type="AudioStream" uid="uid://mfmsjyoyh38n" path="res://Assets/Music/DEMO_MUSIC.mp3" id="9_ynf5e"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hptm8"]
+polygon = PackedVector2Array(17, 46, 20, 46, 20, 45.4545, 20, 44.3636, 20, 44.1818, 20, 44, 20, 40, 21, 40, 21, 38, 22, 38, 22, 36, 23, 36, 23, 34, 24, 34, 24, 33, 25, 33, 25, 32, 26, 32, 26, 31, 28, 31, 28, 30, 11, 30, 11, 33, 14, 33, 14, 34, 15, 34, 15, 35, 16, 35, 16, 37, 17, 37, 17, 37.9091, 17, 38, 18, 38, 18, 39, 17, 39)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d1ilt"]
+polygon = PackedVector2Array(1.90909, 49, 0, 49, 0, 30.0909, 0, 30, 11, 30, 11, 33, 10, 33, 10, 34, 9, 34, 9, 35, 8, 35, 8, 37, 7, 37, 7, 38, 6, 38, 6, 39, 7, 39, 7, 49, 4, 49, 3, 49)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hptm8"]
 atlas = ExtResource("3_ynf5e")
@@ -50,6 +57,11 @@ animations = [{
 font = ExtResource("7_6bp64")
 font_size = 10
 font_color = Color(0.113725, 0.168627, 0.32549, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(0, 0)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_344ge")
@@ -60,6 +72,12 @@ offset_right = 64.0
 offset_bottom = 63.0
 scale = Vector2(11, 11)
 texture = ExtResource("1_jjvhh")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Background"]
+occluder = SubResource("OccluderPolygon2D_hptm8")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="Background"]
+occluder = SubResource("OccluderPolygon2D_d1ilt")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -72,24 +90,41 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.164706)
 
 [node name="Mole2" type="AnimatedSprite2D" parent="."]
-position = Vector2(409, 450)
+position = Vector2(407, 450)
 scale = Vector2(11, 11)
 sprite_frames = SubResource("SpriteFrames_wsu2k")
 autoplay = "default"
 frame_progress = 0.920186
 
-[node name="Sprite1" type="Sprite2D" parent="."]
+[node name="Sprite1" type="CharacterBody2D" parent="."]
 visible = false
+position = Vector2(-2, 1)
+
+[node name="Lantern" type="Sprite2D" parent="Sprite1"]
 position = Vector2(134, 460)
 scale = Vector2(11, 11)
 texture = ExtResource("2_kry3j")
 
-[node name="LanternLight" type="PointLight2D" parent="Sprite1"]
-position = Vector2(0.622222, 2.75556)
+[node name="LanternLight" type="PointLight2D" parent="Sprite1/Lantern"]
+position = Vector2(-0.0909081, 4.72727)
 scale = Vector2(0.0888889, 0.0888889)
 energy = 0.0
+shadow_enabled = true
 texture = ExtResource("3_6bp64")
 script = ExtResource("4_344ge")
+
+[node name="LanternSound" type="AudioStreamPlayer2D" parent="Sprite1"]
+position = Vector2(134, 460)
+scale = Vector2(11, 11)
+
+[node name="Area2D" type="Area2D" parent="Sprite1"]
+script = ExtResource("7_hptm8")
+
+[node name="HitBox" type="CollisionPolygon2D" parent="Sprite1/Area2D"]
+visible = false
+position = Vector2(135, 480)
+scale = Vector2(11, 11)
+polygon = PackedVector2Array(-6.09091, -5.81818, -5.09091, -5.81818, -5.09091, -6.81818, -4.09091, -6.81818, -4.09091, -8.81818, -3.09091, -8.81818, -3.09091, -9.81818, -2.09091, -9.81818, -2.09091, -10.8182, 1.90909, -10.8182, 1.90909, -9.81818, 2.90909, -9.81818, 2.90909, -8.81818, 3.90909, -8.81818, 3.90909, -6.81818, 4.90909, -6.81818, 4.90909, -5.81818, 5.90909, -5.81818, 5.90909, -4.81818, 4.90909, -4.81818, 4.90909, 6.18182, 3.90909, 6.18182, 3.90909, 7.18182, -4.09091, 7.18182, -4.09091, 6.18182, -5.09091, 6.18182, -5.09091, -4.81818, -6.09091, -4.81818)
 
 [node name="Sprite2" type="Sprite2D" parent="."]
 visible = false

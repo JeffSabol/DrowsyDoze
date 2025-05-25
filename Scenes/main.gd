@@ -35,6 +35,7 @@ func _input(event):
 		update_click_counter()
 		save_game()
 		check_rewards()
+		show_plus_one(get_global_mouse_position())
 
 func update_click_counter():
 	$Sprite2/ClickCounter.text = str(total_clicks)
@@ -51,7 +52,7 @@ func check_rewards():
 
 func fade_in_sprite(node_path: String):
 	var sprite = get_node_or_null(node_path)
-	if sprite and sprite is Sprite2D:
+	if sprite:
 		sprite.visible = true
 		sprite.modulate.a = 0.0
 		var tween := create_tween()
@@ -122,3 +123,15 @@ func load_game():
 				var result = JSON.parse_string(json_string)
 				if result:
 					total_clicks = result.get("total_clicks", 0)
+					
+func show_plus_one(pos: Vector2):
+	var plus_one = Sprite2D.new()
+	plus_one.texture = preload("res://Assets/PlusOne.png")
+	plus_one.position = pos
+	plus_one.z_index = 100  # Optional: make sure it's on top
+	add_child(plus_one)
+
+	var tween = create_tween()
+	tween.tween_property(plus_one, "position:y", pos.y - 30, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(plus_one, "modulate:a", 0.0, 0.8).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_callback(Callable(plus_one, "queue_free"))
