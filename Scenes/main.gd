@@ -1,6 +1,14 @@
 # Jeff Sabol
 extends Node2D
 
+@onready var scoreboard = $Sprite2/Sign
+@onready var hover_zone = $Sprite2/HoverZone
+var scoreboard_height: float = 0.0
+var tween: Tween
+var is_hovering = false
+var is_showing_due_to_milestone = false
+
+
 var total_clicks: int = 0
 var save_file_path := "user://save_data.json"
 var unlock_thresholds := [5, 15, 30, 60, 110, 200, 360, 650, 1150, 2000, 3600, 6500, 11000]
@@ -10,7 +18,7 @@ var unlocked_milestones: Array = []
 var milestone_actions := {
 	5: func(): print("TODO +1 for each click"),
 	15: func(): fade_in_sprite("Sprite1"),
-	30: func(): fade_in_sprite("Sprite2"),
+	30: func(): show_scoreboard_temporarily(),
 	60: func(): flicker_light("LanternRed"),
 	110: func(): print("TOOD"),
 	200: func(): print("TOOD"),
@@ -28,6 +36,11 @@ func _ready():
 	load_game()
 	update_click_counter()
 	hide_all_sprites()
+	
+	scoreboard_height = scoreboard.get_rect().size.y
+	scoreboard.position.y = -scoreboard_height
+	hover_zone.mouse_entered.connect(_on_hover_zone_mouse_entered)
+	hover_zone.mouse_exited.connect(_on_hover_zone_mouse_exited)
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -38,8 +51,8 @@ func _input(event):
 		show_plus_one(get_global_mouse_position())
 
 func update_click_counter():
-	$Sprite2/ClickCounter.text = str(total_clicks)
-	$Sprite2/ClickCounter.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	$Sprite2/Sign/ClickCounter.text = str(total_clicks)
+	$Sprite2/Sign/ClickCounter.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	print_xp_gauge()
 
 func check_rewards():
@@ -128,10 +141,39 @@ func show_plus_one(pos: Vector2):
 	var plus_one = Sprite2D.new()
 	plus_one.texture = preload("res://Assets/PlusOne.png")
 	plus_one.position = pos
-	plus_one.z_index = 100  # Optional: make sure it's on top
+	 # Make sure it's on top
+	plus_one.z_index = 100
 	add_child(plus_one)
 
 	var tween = create_tween()
 	tween.tween_property(plus_one, "position:y", pos.y - 30, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(plus_one, "modulate:a", 0.0, 0.8).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_callback(Callable(plus_one, "queue_free"))
+
+func slide_scoreboard(to_y: float, duration := 0.5):
+	if tween: tween.kill()
+	tween = create_tween()
+	tween.tween_property(scoreboard, "position:y", to_y, duration).set_trans(Tween.TRANS_SINE)
+
+func show_scoreboard_temporarily():
+	if is_showing_due_to_milestone:
+		return
+
+	is_showing_due_to_milestone = true
+	slide_scoreboard(22.0)
+
+	await get_tree().create_timer(1.5).timeout
+
+	if not is_hovering:
+		slide_scoreboard(-scoreboard_height)
+	is_showing_due_to_milestone = false
+	
+func _on_hover_zone_mouse_entered():
+	is_hovering = true
+	slide_scoreboard(22.0)
+
+
+func _on_hover_zone_mouse_exited():
+	is_hovering = false
+	if not is_showing_due_to_milestone:
+		slide_scoreboard(-scoreboard_height)
