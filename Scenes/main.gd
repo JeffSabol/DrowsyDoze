@@ -22,10 +22,10 @@ var milestones := {
 	10: { "name": "Scoreboard", "action": func(): show_scoreboard_temporarily() },
 	30: { "name": "Lantern", "action": func(): fade_in_sprite("Sprite1")},
 	60: { "name": "Bubbles", "action": func(): bubble_handling() },
-	110: { "name": "Glowing stars fill cave background", "action": func(): print("TODO glowing starts fill the cave background") },
+	110: { "name": "Glowing stars fill cave background", "action": func(): fade_in_sprite("StarsGroup") },
 	200: { "name": "Sleeping cap", "action": func(): print("TODO sleeping cap") },
 	360: { "name": "???", "action": func(): print("TODO") },
-	650: { "name": "More stars", "action": func(): print("TODO glowing starts fill the cave") },
+	650: { "name": "More stars", "action": func(): fade_in_sprite("StarsGroup") },
 	1150: { "name": "Sleep talking", "action": func(): print("TODO sleep talking") },
 	2000: { "name": "???", "action": func(): print("TODO") },
 	3600: { "name": "???", "action": func(): print("TODO") },
@@ -35,7 +35,7 @@ var milestones := {
 
 
 func _ready():
-	#reset_clicks()
+	reset_clicks()
 	load_game()
 	hide_all_sprites()
 	update_click_counter()
