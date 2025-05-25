@@ -225,4 +225,11 @@ func _on_upgrade_button_mouse_entered():
 			$UpgradeButton.tooltip_text = "Next: %s\nCost: %d clicks (%d more needed)" % [name, milestone, remaining]
 			return
 
-	$UpgradeButton.tooltip_text = "All upgrades unlocked"
+func play_random_lantern_sound():
+	var index = randi_range(1, 10)
+	var path = "res://Assets/SFX/Lantern%d.wav" % index
+	print("Audio path:" + path)
+	var stream = load(path)
+	if stream:
+		$LanternSound.stream = stream
+		$LanternSound.play()
