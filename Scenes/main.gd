@@ -4,6 +4,7 @@ extends Node2D
 @onready var scoreboard = $Sprite2/Sign
 @onready var hover_zone = $Sprite2/HoverZone
 @onready var xp_bar = $XPBar
+@onready var upgrade_button = $UpgradeButton
 var loading_bar_frames: Array[Texture2D] = []
 var scoreboard_height: float = 0.0
 var tween: Tween
@@ -20,12 +21,12 @@ var unlocked_milestones: Array = []
 var milestone_actions := {
 	10: func(): show_scoreboard_temporarily(),
 	30: func(): fade_in_sprite("Sprite1"),
-	60: func(): print("TOOD"),
-	110: func(): print("TOOD"),
-	200: func(): print("TOOD"),
+	60: func(): print("TODO bubbles +1 point per pop"),
+	110: func(): print("TODO glowing starts fill the cave background"),
+	200: func(): print("TODO sleeping cap"),
 	360: func(): print("TOOD"),
-	650: func(): print("TOOD"),
-	1150: func(): print("TOOD"),
+	650: func(): print("TODO glowing starts fill the cave"),
+	1150: func(): print("TODO sleep talking"),
 	2000: func(): print("TOOD"),
 	3600: func(): print("TOOD"),
 	6500: func(): print("TOOD"),
@@ -63,12 +64,12 @@ func preload_loading_bar_textures():
 		loading_bar_frames.append(load(path))
 
 func check_rewards():
+	var has_available_reward = false
 	for milestone in unlock_thresholds:
-		if total_clicks == milestone and milestone not in unlocked_milestones:
-			print("🎉 Milestone reached at %d clicks!" % milestone)
-			if milestone_actions.has(milestone):
-				milestone_actions[milestone].call()
-			unlocked_milestones.append(milestone)
+		if total_clicks >= milestone and milestone not in unlocked_milestones:
+			has_available_reward = true
+			break
+	upgrade_button.visible = has_available_reward
 
 func fade_in_sprite(node_path: String):
 	var sprite = get_node_or_null(node_path)
@@ -86,6 +87,7 @@ func flicker_light(node_path: String):
 		tween.tween_property(light, "energy", 1.0, 0.1)
 
 func update_xp_gauge():
+	# Necessary to prevent error: Invalid access of index '0' on a base object of type: 'Array[Texture2D]'.
 	if loading_bar_frames.size() < 22:
 		print("Loading bar textures not ready yet.")
 		return
@@ -145,6 +147,7 @@ func load_game():
 			var result = JSON.parse_string(json_string)
 			if result:
 				total_clicks = result.get("total_clicks", 0)
+				unlocked_milestones = result.get("unlocked_milestones", [])
 	else:
 		if FileAccess.file_exists(save_file_path):
 			var file = FileAccess.open(save_file_path, FileAccess.READ)
@@ -154,6 +157,7 @@ func load_game():
 				var result = JSON.parse_string(json_string)
 				if result:
 					total_clicks = result.get("total_clicks", 0)
+					unlocked_milestones = result.get("unlocked_milestones", [])
 					
 func show_plus_one(pos: Vector2):
 	var plus_one = Sprite2D.new()
@@ -190,8 +194,19 @@ func _on_hover_zone_mouse_entered():
 	is_hovering = true
 	slide_scoreboard(22.0)
 
-
 func _on_hover_zone_mouse_exited():
 	is_hovering = false
 	if not is_showing_due_to_milestone:
 		slide_scoreboard(-scoreboard_height)
+
+func _on_upgrade_button_button_up():
+	for milestone in unlock_thresholds:
+		if total_clicks >= milestone and milestone not in unlocked_milestones:
+			total_clicks -= milestone
+			unlocked_milestones.append(milestone)
+			update_click_counter()
+			save_game()
+			check_rewards()
+			if milestone_actions.has(milestone):
+				milestone_actions[milestone].call()
+			break  # Only redeem one milestone per click
