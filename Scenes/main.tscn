@@ -1480,7 +1480,6 @@ color = Color(0, 0, 0, 0.164706)
 [node name="Mole" type="AnimatedSprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_fevyy")
 position = Vector2(408, 438)
-rotation = -0.00202461
 scale = Vector2(11, 11)
 sprite_frames = SubResource("SpriteFrames_wsu2k")
 autoplay = "default"
