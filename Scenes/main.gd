@@ -25,7 +25,7 @@ var milestones := {
 	110: { "name": "Sleeping cap", "action": func(): fade_in_sprite("SleepingCap") },
 	200: { "name": "Dreaming", "action": func():  print("TODO dreaming of various sprites") },
 	360: { "name": "Glowing stars fill cave background", "action": func(): fade_in_sprite("StarsGroup") },
-	650: { "name": "???", "action": print("TODO") },
+	650: { "name": "???", "action": func(): print("TODO") },
 	1150: { "name": "???", "action": func(): print("TODO") },
 	2000: { "name": "???", "action": func(): print("TODO") },
 	3600: { "name": "???", "action": func(): print("TODO") },
