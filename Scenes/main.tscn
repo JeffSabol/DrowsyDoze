@@ -1,4 +1,4 @@
-[gd_scene load_steps=180 format=3 uid="uid://dsxnj061aof00"]
+[gd_scene load_steps=181 format=3 uid="uid://dsxnj061aof00"]
 
 [ext_resource type="Script" uid="uid://cysbs8pyex71p" path="res://Scenes/main.gd" id="1_344ge"]
 [ext_resource type="Texture2D" uid="uid://d4rrkfijdquy" path="res://Assets/BackgroundTunnels.png" id="2_b3802"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://jsvmwlhllii8" path="res://Assets/UpgradeArrowHover.png" id="13_wsu2k"]
 [ext_resource type="Texture2D" uid="uid://l3sg5vjjhg1v" path="res://Assets/UpgradeArrowDisabled.png" id="14_k12tt"]
 [ext_resource type="Texture2D" uid="uid://7xoanpjk8w3j" path="res://Assets/Bubble.png" id="16_k12tt"]
+[ext_resource type="Texture2D" uid="uid://dh7t3r1r2o704" path="res://Assets/SleepingCap.png" id="19_fevyy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1aky"]
 atlas = ExtResource("3_fevyy")
@@ -1581,6 +1582,12 @@ texture_disabled = ExtResource("14_k12tt")
 visible = false
 position = Vector2(183, 473)
 sprite_frames = SubResource("SpriteFrames_o1aky")
+
+[node name="SleepingCap" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(364, 394)
+scale = Vector2(11, 11)
+texture = ExtResource("19_fevyy")
 
 [connection signal="gui_input" from="Sprite1/Lantern/SFXZone" to="Sprite1/Lantern/SFXZone" method="_gui_input"]
 [connection signal="mouse_entered" from="Sprite2/HoverZone" to="." method="_on_hover_zone_mouse_entered"]
