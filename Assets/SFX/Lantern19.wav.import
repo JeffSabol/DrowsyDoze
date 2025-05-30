@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cb2rc1qs4r4il"
-path="res://.godot/imported/Lantern2.wav-db7bfa66c8374f6748f011a4d8ac0c98.sample"
+uid="uid://bmpqbl6cxp7yg"
+path="res://.godot/imported/Lantern19.wav-3b5256e34b8f14e09ed6c4196b3efaaa.sample"
 
 [deps]
 
-source_file="res://Assets/SFX/Lantern2.wav"
-dest_files=["res://.godot/imported/Lantern2.wav-db7bfa66c8374f6748f011a4d8ac0c98.sample"]
+source_file="res://Assets/SFX/Lantern19.wav"
+dest_files=["res://.godot/imported/Lantern19.wav-3b5256e34b8f14e09ed6c4196b3efaaa.sample"]
 
 [params]
 
