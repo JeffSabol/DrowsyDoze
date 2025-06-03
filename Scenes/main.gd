@@ -16,6 +16,7 @@ var total_clicks: int = 0
 var save_file_path := "user://save_data.json"
 var unlock_thresholds := [10, 30, 60, 110, 200, 360, 650, 1150, 2000, 3600, 6500, 11000]
 var unlocked_milestones: Array = []
+var click_value := 1
 
 # Define custom milestone behavior
 var milestones := {
@@ -23,19 +24,20 @@ var milestones := {
 	30: { "name": "Lantern", "action": func(): fade_in_sprite("Sprite1")},
 	60: { "name": "Bubbles", "action": func(): bubble_handling() },
 	110: { "name": "Sleeping cap", "action": func(): fade_in_sprite("SleepingCap") },
-	200: { "name": "Dreaming", "action": func():  print("TODO dreaming of various sprites") },
+	200: { "name": "Click Power I", "action": func():  click_value = 2 },
+	#200: { "name": "Dreaming", "action": func():  print("TODO dreaming of various sprites") },
 	360: { "name": "Glowing stars fill cave background", "action": func(): fade_in_sprite("StarsGroup") },
-	650: { "name": "???", "action": func(): print("TODO") },
-	1150: { "name": "???", "action": func(): print("TODO") },
-	2000: { "name": "???", "action": func(): print("TODO") },
-	3600: { "name": "???", "action": func(): print("TODO") },
-	6500: { "name": "???", "action": func(): print("TODO") },
-	11000: { "name": "???", "action": func(): print("TODO") }
+	600: { "name": "Drifting Zs", "action": func(): fade_in_sprite("FloatingZs") },
+	1100: { "name": "Click Power II", "action": func(): click_value = 3 },
+	#1100: { "name": "Nose wiggle", "action": func(): a_func() },
+	#2700: { "name": "Sigh puff", "action": func(): a_func() },
+	4500: { "name": "Click Power II", "action": func(): click_value = 4 },
+	5000: { "name": "???", "action": func(): print("TODO") },
+	10000: { "name": "???", "action": func(): print("TODO") }
 }
 
 
 func _ready():
-	reset_clicks()
 	load_game()
 	hide_all_sprites()
 	update_click_counter()
@@ -45,9 +47,10 @@ func _ready():
 	hover_zone.mouse_entered.connect(_on_hover_zone_mouse_entered)
 	hover_zone.mouse_exited.connect(_on_hover_zone_mouse_exited)
 
+# Reward the player for each tap
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		total_clicks += 1
+		total_clicks += click_value
 		update_click_counter()
 		save_game()
 		check_rewards()
@@ -105,7 +108,11 @@ func reset_clicks():
 	hide_all_sprites()
 
 func save_game():
-	var data = { "total_clicks": total_clicks }
+	var data = { 
+		"total_clicks": total_clicks,
+		"unlocked_milestones": unlocked_milestones,
+		"click_value": click_value
+	 }
 	var json_string = JSON.stringify(data)
 
 	if OS.has_feature("web"):
@@ -124,6 +131,7 @@ func load_game():
 			if result:
 				total_clicks = result.get("total_clicks", 0)
 				unlocked_milestones = result.get("unlocked_milestones", [])
+				click_value = result.get("click_value", 1)
 	else:
 		if FileAccess.file_exists(save_file_path):
 			var file = FileAccess.open(save_file_path, FileAccess.READ)
@@ -134,19 +142,40 @@ func load_game():
 				if result:
 					total_clicks = result.get("total_clicks", 0)
 					unlocked_milestones = result.get("unlocked_milestones", [])
+					click_value = result.get("click_value", 1)
 					
 func show_plus_one(pos: Vector2):
-	var plus_one = Sprite2D.new()
-	plus_one.texture = preload("res://Assets/PlusOne.png")
-	plus_one.position = pos
-	 # Make sure it's on top
-	plus_one.z_index = 100
-	add_child(plus_one)
+	var plus = Sprite2D.new()
+	match click_value: 
+		1:
+			plus.texture = preload("res://Assets/PlusOne.png")
+		2:
+			plus.texture = preload("res://Assets/PlusTwo.png")
+		3:
+			plus.texture = preload("res://Assets/PlusThree.png")
+		4:
+			plus.texture = preload("res://Assets/PlusFour.png")
+		5:
+			plus.texture = preload("res://Assets/PlusFive.png")
+		6:
+			plus.texture = preload("res://Assets/PlusSix.png")
+		7:
+			plus.texture = preload("res://Assets/PlusSeven.png")
+		8:
+			plus.texture = preload("res://Assets/PlusEight.png")
+		9:
+			plus.texture = preload("res://Assets/PlusNine.png")
+	plus.position = pos
+	plus.z_index = 100
+	# Make sure it's on top
+	add_child(plus)
+	show_plus_tween(plus, pos)
 
+func show_plus_tween(plus, pos):
 	var tween = create_tween()
-	tween.tween_property(plus_one, "position:y", pos.y - 30, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(plus_one, "modulate:a", 0.0, 0.8).set_trans(Tween.TRANS_LINEAR)
-	tween.tween_callback(Callable(plus_one, "queue_free"))
+	tween.tween_property(plus, "position:y", pos.y - 30, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(plus, "modulate:a", 0.0, 0.8).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_callback(Callable(plus, "queue_free"))
 
 func slide_scoreboard(to_y: float, duration := 0.5):
 	if tween: tween.kill()
