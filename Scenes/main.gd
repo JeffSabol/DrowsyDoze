@@ -130,7 +130,7 @@ func load_game():
 			var result = JSON.parse_string(json_string)
 			if result:
 				total_clicks = result.get("total_clicks", 0)
-				unlocked_milestones = result.get("unlocked_milestones", [])
+				unlocked_milestones = result.get("unlocked_milestones", []).map(func(m): return int(m))
 				click_value = result.get("click_value", 1)
 	else:
 		if FileAccess.file_exists(save_file_path):
@@ -141,9 +141,15 @@ func load_game():
 				var result = JSON.parse_string(json_string)
 				if result:
 					total_clicks = result.get("total_clicks", 0)
-					unlocked_milestones = result.get("unlocked_milestones", [])
+					unlocked_milestones = result.get("unlocked_milestones", []).map(func(m): return int(m))
 					click_value = result.get("click_value", 1)
-					
+	# Re-apply unlocked milestone effects
+	for milestone in unlocked_milestones:
+		if milestones.has(milestone):
+			var action = milestones[milestone].get("action")
+			if action:
+				action.call()
+
 func show_plus_one(pos: Vector2):
 	var plus = Sprite2D.new()
 	match click_value: 
