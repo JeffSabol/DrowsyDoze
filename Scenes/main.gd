@@ -39,7 +39,6 @@ var milestones := {
 
 func _ready():
 	load_game()
-	hide_all_sprites()
 	update_click_counter()
 	
 	scoreboard_height = scoreboard.get_rect().size.y
@@ -55,6 +54,12 @@ func _input(event):
 		save_game()
 		check_rewards()
 		show_plus_one(get_global_mouse_position())
+
+func _process(delta):
+	if Input.is_key_pressed(KEY_CTRL) and Input.is_key_pressed(KEY_R):
+		reset_clicks()
+		update_click_counter()
+		click_value=1
 
 func update_click_counter():
 	$Sprite2/Sign/ClickCounter.text = str(total_clicks)
@@ -93,19 +98,18 @@ func get_next_unlocked_milestone() -> int:
 			return milestone
 	return unlock_thresholds[-1]  # All milestones done
 
-func hide_all_sprites():
-	for i in range(unlock_thresholds.size()):
-		var sprite = get_node_or_null("Sprite" + str(i + 1))
-		if sprite and sprite is Sprite2D:
-			sprite.modulate.a = 0.0
-			sprite.visible = false
+#func hide_all_sprites():
+	#for i in range(unlock_thresholds.size()):
+		#var sprite = get_node_or_null("Sprite" + str(i + 1))
+		#if sprite and sprite is Sprite2D:
+			#sprite.modulate.a = 0.0
+			#sprite.visible = false
 
 func reset_clicks():
 	total_clicks = 0
 	unlocked_milestones.clear()
 	save_game()
 	update_click_counter()
-	hide_all_sprites()
 
 func save_game():
 	var data = { 
@@ -143,6 +147,9 @@ func load_game():
 					total_clicks = result.get("total_clicks", 0)
 					unlocked_milestones = result.get("unlocked_milestones", []).map(func(m): return int(m))
 					click_value = result.get("click_value", 1)
+	load_milestones()
+				
+func load_milestones():
 	# Re-apply unlocked milestone effects
 	for milestone in unlocked_milestones:
 		if milestones.has(milestone):
