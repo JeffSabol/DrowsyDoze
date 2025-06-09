@@ -1657,12 +1657,12 @@ texture_hover = ExtResource("13_wsu2k")
 texture_disabled = ExtResource("14_k12tt")
 
 [node name="Bubble" type="AnimatedSprite2D" parent="."]
-position = Vector2(183, 474)
+visible = false
+position = Vector2(172, 472)
 sprite_frames = SubResource("SpriteFrames_o1aky")
 
 [node name="SleepingCap" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(364, 394)
+position = Vector2(374, 429)
 scale = Vector2(11, 11)
 texture = ExtResource("19_fevyy")
 

@@ -21,19 +21,32 @@ var click_value := 1
 # Define custom milestone behavior
 var milestones := {
 	10: { "name": "Scoreboard", "action": func(): show_scoreboard_temporarily() },
-	30: { "name": "Lantern", "action": func(): fade_in_sprite("Sprite1")},
-	50: { "name": "Bubbles", "action": func(): bubble_handling() },
+	25: { "name": "Bubbles", "action": func(): bubble_handling() },
 	100: { "name": "Click Power I", "action": func():  click_value = 2 },
+	200: { "name": "Lantern", "action": func(): fade_in_sprite("Sprite1")},
 	#200: { "name": "Dreaming", "action": func():  print("TODO dreaming of various sprites") },
-	300: { "name": "Glowing stars fill cave background", "action": func(): fade_in_sprite("StarsGroup") },
+	250: { "name": "Glowing stars fill cave background", "action": func(): fade_in_sprite("StarsGroup") },
 	500: { "name": "Drifting Zs", "action": func(): fade_in_sprite("FloatingZs") },
 	1000: { "name": "Click Power II", "action": func(): click_value = 3 },
 	2000: { "name": "Sleeping cap", "action": func(): fade_in_sprite("SleepingCap") },
 	#1100: { "name": "Nose wiggle", "action": func(): a_func() },
 	#2700: { "name": "Sigh puff", "action": func(): a_func() },
-	4000: { "name": "Click Power III", "action": func(): click_value = 4 },
-	5000: { "name": "???", "action": func(): print("TODO") },
-	10000: { "name": "???", "action": func(): print("TODO") }
+	4000: { "name": "???", "action": func(): print("TODO") },
+	5000: { "name": "Click Power III", "action": func(): click_value = 4 },
+	7500: { "name": "???", "action": func(): print("TODO") },
+	10000: { "name": "???", "action": func(): print("TODO") },
+	20000: { "name": "???", "action": func(): print("TODO") },
+	30000: { "name": "Click Power IV", "action": func(): click_value = 5 },
+	40000: { "name": "???", "action": func(): print("TODO") },
+	50000: { "name": "???", "action": func(): print("TODO") },
+	75000: { "name": "???", "action": func(): print("TODO") },
+	100000: { "name": "Click Power V", "action": func(): click_value = 6 },
+	125000: { "name": "???", "action": func(): print("TODO") },
+	150000: { "name": "???", "action": func(): print("TODO") },
+	175000: { "name": "???", "action": func(): print("TODO") },
+	200000: { "name": "???", "action": func(): print("TODO") },
+	250000: { "name": "???", "action": func(): print("TODO") },
+	300000: { "name": "Click Power V", "action": func(): click_value = 7 },
 }
 
 
