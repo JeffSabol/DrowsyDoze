@@ -1,4 +1,4 @@
-[gd_scene load_steps=182 format=3 uid="uid://dsxnj061aof00"]
+[gd_scene load_steps=198 format=3 uid="uid://dsxnj061aof00"]
 
 [ext_resource type="Script" uid="uid://cysbs8pyex71p" path="res://Scenes/main.gd" id="1_344ge"]
 [ext_resource type="Texture2D" uid="uid://d4rrkfijdquy" path="res://Assets/BackgroundTunnels.png" id="2_b3802"]
@@ -14,11 +14,26 @@
 [ext_resource type="Script" uid="uid://cc0kyoukgp43g" path="res://Scenes/sfx_zone.gd" id="7_jkdf5"]
 [ext_resource type="AudioStream" uid="uid://bwpaayjlt85pp" path="res://Assets/Music/DEMO_MUSIC.mp3" id="9_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://v5v7pv5ornvb" path="res://Assets/UpgradeArrow.png" id="11_d1ilt"]
+[ext_resource type="Texture2D" uid="uid://dlxq3msctcm10" path="res://Assets/1/1_0.png" id="11_neg2b"]
 [ext_resource type="Texture2D" uid="uid://ci45rx7vbgyy3" path="res://Assets/UpgradeArrowPressed.png" id="12_jkdf5"]
+[ext_resource type="Texture2D" uid="uid://cm4gb4j71ayq3" path="res://Assets/1/1_1.png" id="12_r33sp"]
+[ext_resource type="Texture2D" uid="uid://cq1rn5fpkx5ht" path="res://Assets/1/1_2.png" id="13_hdf80"]
 [ext_resource type="Texture2D" uid="uid://jsvmwlhllii8" path="res://Assets/UpgradeArrowHover.png" id="13_wsu2k"]
+[ext_resource type="Texture2D" uid="uid://bbxta6w7uwdbv" path="res://Assets/1/1_3.png" id="14_jwpg7"]
 [ext_resource type="Texture2D" uid="uid://l3sg5vjjhg1v" path="res://Assets/UpgradeArrowDisabled.png" id="14_k12tt"]
+[ext_resource type="Texture2D" uid="uid://c0fk122ar710d" path="res://Assets/1/1_4.png" id="15_k2e45"]
+[ext_resource type="Texture2D" uid="uid://b30lbgqunasik" path="res://Assets/1/1_5.png" id="16_536cc"]
 [ext_resource type="Texture2D" uid="uid://7xoanpjk8w3j" path="res://Assets/Bubble.png" id="16_k12tt"]
+[ext_resource type="Texture2D" uid="uid://c5r6qi0hxpt68" path="res://Assets/1/1_6.png" id="17_aqgau"]
+[ext_resource type="Texture2D" uid="uid://reep8yvja403" path="res://Assets/1/1_7.png" id="18_8cuat"]
 [ext_resource type="Texture2D" uid="uid://dh7t3r1r2o704" path="res://Assets/SleepingCap.png" id="19_fevyy"]
+[ext_resource type="Texture2D" uid="uid://c0nferw3ve6rt" path="res://Assets/1/1_8.png" id="19_o1aky"]
+[ext_resource type="Texture2D" uid="uid://dyeaa5lsp5ihj" path="res://Assets/1/1_9.png" id="20_kwxat"]
+[ext_resource type="Texture2D" uid="uid://2j00m0flt0pw" path="res://Assets/1/1_10.png" id="21_aa8k8"]
+[ext_resource type="Texture2D" uid="uid://dd5w0avya3iw" path="res://Assets/1/1_11.png" id="22_kqrg6"]
+[ext_resource type="Texture2D" uid="uid://bs5e2k7vcx8kq" path="res://Assets/1/1_12.png" id="23_nwwfm"]
+[ext_resource type="Texture2D" uid="uid://bffgp40qi23fs" path="res://Assets/1/1_13.png" id="24_s8vy0"]
+[ext_resource type="Texture2D" uid="uid://b546jjqily5sm" path="res://Assets/1/1_14.png" id="25_jut3y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1aky"]
 atlas = ExtResource("3_fevyy")
@@ -962,6 +977,59 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_v2nl5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_neg2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_r33sp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_hdf80")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_jwpg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_k2e45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_536cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_aqgau")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_8cuat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_o1aky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_kwxat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_aa8k8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_kqrg6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nwwfm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_s8vy0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_jut3y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
 [sub_resource type="LabelSettings" id="LabelSettings_jjvhh"]
 font = ExtResource("7_6bp64")
 font_size = 10
@@ -1479,7 +1547,7 @@ color = Color(0, 0, 0, 0.164706)
 
 [node name="Mole" type="AnimatedSprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_fevyy")
-position = Vector2(408, 438)
+position = Vector2(407, 484)
 scale = Vector2(11, 11)
 sprite_frames = SubResource("SpriteFrames_wsu2k")
 autoplay = "default"
@@ -1525,6 +1593,13 @@ script = ExtResource("7_jkdf5")
 position = Vector2(134, 460)
 scale = Vector2(11, 11)
 volume_db = -20.0
+
+[node name="Flame" type="AnimatedSprite2D" parent="Sprite1"]
+position = Vector2(145, 427)
+rotation = 1.5708
+scale = Vector2(11, 11)
+sprite_frames = SubResource("SpriteFrames_v2nl5")
+autoplay = "default"
 
 [node name="Sprite2" type="Node2D" parent="."]
 position = Vector2(352, -155)
@@ -1582,8 +1657,7 @@ texture_hover = ExtResource("13_wsu2k")
 texture_disabled = ExtResource("14_k12tt")
 
 [node name="Bubble" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(183, 473)
+position = Vector2(183, 474)
 sprite_frames = SubResource("SpriteFrames_o1aky")
 
 [node name="SleepingCap" type="Sprite2D" parent="."]

@@ -22,16 +22,16 @@ var click_value := 1
 var milestones := {
 	10: { "name": "Scoreboard", "action": func(): show_scoreboard_temporarily() },
 	30: { "name": "Lantern", "action": func(): fade_in_sprite("Sprite1")},
-	60: { "name": "Bubbles", "action": func(): bubble_handling() },
-	110: { "name": "Sleeping cap", "action": func(): fade_in_sprite("SleepingCap") },
-	200: { "name": "Click Power I", "action": func():  click_value = 2 },
+	50: { "name": "Bubbles", "action": func(): bubble_handling() },
+	100: { "name": "Click Power I", "action": func():  click_value = 2 },
 	#200: { "name": "Dreaming", "action": func():  print("TODO dreaming of various sprites") },
-	360: { "name": "Glowing stars fill cave background", "action": func(): fade_in_sprite("StarsGroup") },
-	600: { "name": "Drifting Zs", "action": func(): fade_in_sprite("FloatingZs") },
-	1100: { "name": "Click Power II", "action": func(): click_value = 3 },
+	300: { "name": "Glowing stars fill cave background", "action": func(): fade_in_sprite("StarsGroup") },
+	500: { "name": "Drifting Zs", "action": func(): fade_in_sprite("FloatingZs") },
+	1000: { "name": "Click Power II", "action": func(): click_value = 3 },
+	2000: { "name": "Sleeping cap", "action": func(): fade_in_sprite("SleepingCap") },
 	#1100: { "name": "Nose wiggle", "action": func(): a_func() },
 	#2700: { "name": "Sigh puff", "action": func(): a_func() },
-	4500: { "name": "Click Power II", "action": func(): click_value = 4 },
+	4000: { "name": "Click Power III", "action": func(): click_value = 4 },
 	5000: { "name": "???", "action": func(): print("TODO") },
 	10000: { "name": "???", "action": func(): print("TODO") }
 }
