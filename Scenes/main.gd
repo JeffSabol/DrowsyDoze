@@ -14,7 +14,11 @@ var scoreboard_unlocked := false
 
 var total_clicks: int = 0
 var save_file_path := "user://save_data.json"
-var unlock_thresholds := [10, 30, 60, 110, 200, 360, 650, 1150, 2000, 3600, 6500, 11000]
+var unlock_thresholds := [
+	10, 25, 100, 200, 250, 500, 1000, 1150, 2000, 3000,	4000, 5000, 7500, 10000,
+	 20000, 30000, 40000, 50000, 75000, 100000, 125000, 150000, 175000, 200000,
+	 250000, 300000
+]
 var unlocked_milestones: Array = []
 var click_value := 1
 
@@ -29,7 +33,7 @@ var milestones := {
 	500: { "name": "Drifting Zs", "action": func(): fade_in_sprite("FloatingZs") },
 	1000: { "name": "Click Power II", "action": func(): click_value = 3 },
 	2000: { "name": "Sleeping cap", "action": func(): fade_in_sprite("SleepingCap") },
-	#1100: { "name": "Nose wiggle", "action": func(): a_func() },
+	#3000: { "name": "Nose wiggle", "action": func(): a_func() },
 	#2700: { "name": "Sigh puff", "action": func(): a_func() },
 	4000: { "name": "???", "action": func(): print("TODO") },
 	5000: { "name": "Click Power III", "action": func(): click_value = 4 },
