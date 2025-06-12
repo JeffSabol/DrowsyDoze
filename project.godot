@@ -21,7 +21,7 @@ config/icon="uid://da656p6ovdtns"
 
 window/size/viewport_width=704
 window/size/viewport_height=704
-window/stretch/aspect="expand"
+window/stretch/mode="viewport"
 window/dpi/allow_hidpi=false
 
 [rendering]
