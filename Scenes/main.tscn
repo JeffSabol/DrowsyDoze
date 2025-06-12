@@ -1,4 +1,4 @@
-[gd_scene load_steps=198 format=3 uid="uid://dsxnj061aof00"]
+[gd_scene load_steps=199 format=3 uid="uid://dsxnj061aof00"]
 
 [ext_resource type="Script" uid="uid://cysbs8pyex71p" path="res://Scenes/main.gd" id="1_344ge"]
 [ext_resource type="Texture2D" uid="uid://d4rrkfijdquy" path="res://Assets/BackgroundTunnels.png" id="2_b3802"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://bs5e2k7vcx8kq" path="res://Assets/1/1_12.png" id="23_nwwfm"]
 [ext_resource type="Texture2D" uid="uid://bffgp40qi23fs" path="res://Assets/1/1_13.png" id="24_s8vy0"]
 [ext_resource type="Texture2D" uid="uid://b546jjqily5sm" path="res://Assets/1/1_14.png" id="25_jut3y"]
+[ext_resource type="PackedScene" uid="uid://bwvrtb8boj3ex" path="res://Scenes/DriftingZ.tscn" id="35_r33sp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1aky"]
 atlas = ExtResource("3_fevyy")
@@ -1666,6 +1667,10 @@ visible = false
 position = Vector2(374, 429)
 scale = Vector2(11, 11)
 texture = ExtResource("19_fevyy")
+
+[node name="DriftingZ" parent="." instance=ExtResource("35_r33sp")]
+visible = false
+position = Vector2(518, 308)
 
 [connection signal="gui_input" from="Sprite1/Lantern/SFXZone" to="Sprite1/Lantern/SFXZone" method="_gui_input"]
 [connection signal="mouse_entered" from="Sprite2/HoverZone" to="." method="_on_hover_zone_mouse_entered"]

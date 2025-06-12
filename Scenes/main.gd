@@ -4,13 +4,13 @@ extends Node2D
 @onready var scoreboard = $Sprite2/Sign
 @onready var hover_zone = $Sprite2/HoverZone
 @onready var upgrade_button = $UpgradeButton
+@onready var z_timer = $ZTimer
 var loading_bar_frames: Array[Texture2D] = []
 var scoreboard_height: float = 0.0
 var tween: Tween
 var is_hovering = false
 var is_showing_due_to_milestone = false
 var scoreboard_unlocked := false
-
 
 var total_clicks: int = 0
 var save_file_path := "user://save_data.json"
@@ -28,12 +28,13 @@ var milestones := {
 	25: { "name": "Bubbles", "action": func(): bubble_handling() },
 	100: { "name": "Click Power I", "action": func():  click_value = 2 },
 	200: { "name": "Lantern", "action": func(): fade_in_sprite("Sprite1")},
-	#200: { "name": "Dreaming", "action": func():  print("TODO dreaming of various sprites") },
 	250: { "name": "Glowing stars fill cave background", "action": func(): fade_in_sprite("StarsGroup") },
-	500: { "name": "Drifting Zs", "action": func(): fade_in_sprite("FloatingZs") },
+	500: { "name": "Drifting Zs", "action": func(): start_drifting_zs() },
 	1000: { "name": "Click Power II", "action": func(): click_value = 3 },
 	2000: { "name": "Sleeping cap", "action": func(): fade_in_sprite("SleepingCap") },
 	#3000: { "name": "Nose wiggle", "action": func(): a_func() },
+	#3000: { "name": "Dreaming", "action": func():  print("TODO dreaming of various sprites") },
+	#1100: { "name": "Nose wiggle", "action": func(): a_func() },
 	#2700: { "name": "Sigh puff", "action": func(): a_func() },
 	4000: { "name": "???", "action": func(): print("TODO") },
 	5000: { "name": "Click Power III", "action": func(): click_value = 4 },
@@ -296,3 +297,7 @@ func _on_bubble_frame_changed():
 		show_plus_one($Bubble.global_position)
 		total_clicks += 1
 		update_click_counter()
+
+func start_drifting_zs():
+	var timer = $DriftingZ/ZTimer
+	timer.start()

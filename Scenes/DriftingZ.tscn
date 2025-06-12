@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwvrtb8boj3ex"]
+
+[ext_resource type="Script" uid="uid://buxbr31hycyjp" path="res://Scenes/drifting_z.gd" id="1_32e1d"]
+[ext_resource type="Texture2D" uid="uid://b8jv5721n6oo2" path="res://Assets/Z.png" id="2_lvite"]
+
+[node name="DriftingZ" type="Node2D"]
+script = ExtResource("1_32e1d")
+
+[node name="Z" type="Sprite2D" parent="."]
+scale = Vector2(11, 11)
+texture = ExtResource("2_lvite")
+
+[node name="ZTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="ZTimer" to="." method="_on_z_timer_timeout"]
