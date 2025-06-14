@@ -256,7 +256,7 @@ func _on_upgrade_button_button_up():
 	update_click_counter()
 	save_game()
 	check_rewards()
-
+	$UpgradeButton/AudioStreamPlayer.play()
 	var action = milestones[milestone].get("action")
 	if action:
 		action.call()

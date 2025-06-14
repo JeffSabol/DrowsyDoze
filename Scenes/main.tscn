@@ -1,4 +1,4 @@
-[gd_scene load_steps=199 format=3 uid="uid://dsxnj061aof00"]
+[gd_scene load_steps=200 format=3 uid="uid://dsxnj061aof00"]
 
 [ext_resource type="Script" uid="uid://cysbs8pyex71p" path="res://Scenes/main.gd" id="1_344ge"]
 [ext_resource type="Texture2D" uid="uid://d4rrkfijdquy" path="res://Assets/BackgroundTunnels.png" id="2_b3802"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://bs5e2k7vcx8kq" path="res://Assets/1/1_12.png" id="23_nwwfm"]
 [ext_resource type="Texture2D" uid="uid://bffgp40qi23fs" path="res://Assets/1/1_13.png" id="24_s8vy0"]
 [ext_resource type="Texture2D" uid="uid://b546jjqily5sm" path="res://Assets/1/1_14.png" id="25_jut3y"]
+[ext_resource type="AudioStream" uid="uid://butu718dii4g0" path="res://Assets/SFX/Upgrade.wav" id="33_hdf80"]
 [ext_resource type="PackedScene" uid="uid://bwvrtb8boj3ex" path="res://Scenes/DriftingZ.tscn" id="35_r33sp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1aky"]
@@ -1656,6 +1657,10 @@ texture_normal = ExtResource("11_d1ilt")
 texture_pressed = ExtResource("12_jkdf5")
 texture_hover = ExtResource("13_wsu2k")
 texture_disabled = ExtResource("14_k12tt")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UpgradeButton"]
+stream = ExtResource("33_hdf80")
+volume_db = -22.0
 
 [node name="Bubble" type="AnimatedSprite2D" parent="."]
 visible = false
