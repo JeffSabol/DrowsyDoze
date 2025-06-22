@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c2xmk7qbd648k"
-path="res://.godot/imported/Mole12.wav-2b40903f790f51669f01135f5d65db78.sample"
+path="res://.godot/imported/Mole12.wav-466489bc68639938cd1c4b4ededf82d3.sample"
 
 [deps]
 
-source_file="res://Assets/SFX/Mole12.wav"
-dest_files=["res://.godot/imported/Mole12.wav-2b40903f790f51669f01135f5d65db78.sample"]
+source_file="res://DrowsyDoze/Assets/SFX/Mole12.wav"
+dest_files=["res://.godot/imported/Mole12.wav-466489bc68639938cd1c4b4ededf82d3.sample"]
 
 [params]
 

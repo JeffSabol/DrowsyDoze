@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cf2eqhmmsa56t"
-path="res://.godot/imported/LanternOLD.png-898f53dd6e074d048863650ed213b7bc.ctex"
+path="res://.godot/imported/LanternOLD.png-872024e7d3d3e6f18fe9b6d4e7675fb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/LanternOLD.png"
-dest_files=["res://.godot/imported/LanternOLD.png-898f53dd6e074d048863650ed213b7bc.ctex"]
+source_file="res://DrowsyDoze/Assets/LanternOLD.png"
+dest_files=["res://.godot/imported/LanternOLD.png-872024e7d3d3e6f18fe9b6d4e7675fb5.ctex"]
 
 [params]
 

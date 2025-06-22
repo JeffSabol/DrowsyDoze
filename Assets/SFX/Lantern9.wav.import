@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://hum7x36rw001"
-path="res://.godot/imported/Lantern9.wav-3a3e657507e92162f135cdf07365b53d.sample"
+path="res://.godot/imported/Lantern9.wav-99feca184affeeaea5d0bb639765e69b.sample"
 
 [deps]
 
-source_file="res://Assets/SFX/Lantern9.wav"
-dest_files=["res://.godot/imported/Lantern9.wav-3a3e657507e92162f135cdf07365b53d.sample"]
+source_file="res://DrowsyDoze/Assets/SFX/Lantern9.wav"
+dest_files=["res://.godot/imported/Lantern9.wav-99feca184affeeaea5d0bb639765e69b.sample"]
 
 [params]
 

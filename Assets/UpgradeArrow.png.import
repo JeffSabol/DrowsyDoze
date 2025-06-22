@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://v5v7pv5ornvb"
-path="res://.godot/imported/UpgradeArrow.png-0cdfcaa11c8a8cab8317a99d7580677a.ctex"
+path="res://.godot/imported/UpgradeArrow.png-d348c53fc901f46225a028e7f9ebc1f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UpgradeArrow.png"
-dest_files=["res://.godot/imported/UpgradeArrow.png-0cdfcaa11c8a8cab8317a99d7580677a.ctex"]
+source_file="res://DrowsyDoze/Assets/UpgradeArrow.png"
+dest_files=["res://.godot/imported/UpgradeArrow.png-d348c53fc901f46225a028e7f9ebc1f7.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqyw2u1cm11ai"
-path="res://.godot/imported/SleepingMoleAnimated.png-4c4df55db6b904a21a7f2e7e09b3631c.ctex"
+path="res://.godot/imported/SleepingMoleAnimated.png-61d44d5dfb012088e992b6125d08e420.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/SleepingMoleAnimated.png"
-dest_files=["res://.godot/imported/SleepingMoleAnimated.png-4c4df55db6b904a21a7f2e7e09b3631c.ctex"]
+source_file="res://DrowsyDoze/Assets/SleepingMoleAnimated.png"
+dest_files=["res://.godot/imported/SleepingMoleAnimated.png-61d44d5dfb012088e992b6125d08e420.ctex"]
 
 [params]
 

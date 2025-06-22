@@ -179,23 +179,23 @@ func show_plus_one(pos: Vector2):
 	var plus = Sprite2D.new()
 	match click_value: 
 		1:
-			plus.texture = preload("res://Assets/PlusOne.png")
+			plus.texture = preload("res://DrowsyDoze/Assets/PlusOne.png")
 		2:
-			plus.texture = preload("res://Assets/PlusTwo.png")
+			plus.texture = preload("res://DrowsyDoze/Assets/PlusTwo.png")
 		3:
-			plus.texture = preload("res://Assets/PlusThree.png")
+			plus.texture = preload("res://DrowsyDoze/Assets/PlusThree.png")
 		4:
-			plus.texture = preload("res://Assets/PlusFour.png")
+			plus.texture = preload("res://DrowsyDoze/Assets/PlusFour.png")
 		5:
-			plus.texture = preload("res://Assets/PlusFive.png")
+			plus.texture = preload("res://DrowsyDoze/Assets/PlusFive.png")
 		6:
-			plus.texture = preload("res://Assets/PlusSix.png")
+			plus.texture = preload("res://DrowsyDoze/Assets/PlusSix.png")
 		7:
-			plus.texture = preload("res://Assets/PlusSeven.png")
+			plus.texture = preload("res://DrowsyDoze/Assets/PlusSeven.png")
 		8:
-			plus.texture = preload("res://Assets/PlusEight.png")
+			plus.texture = preload("res://DrowsyDoze/Assets/PlusEight.png")
 		9:
-			plus.texture = preload("res://Assets/PlusNine.png")
+			plus.texture = preload("res://DrowsyDoze/Assets/PlusNine.png")
 	plus.position = pos
 	plus.z_index = 100
 	# Make sure it's on top

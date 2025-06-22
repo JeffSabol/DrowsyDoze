@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://kb7bhsw4h5pm"
-path="res://.godot/imported/pzim3x5b.ttf-4470c88be870428c958bdede88fa2330.fontdata"
+path="res://.godot/imported/pzim3x5b.ttf-ee7c5a3928e7a3abbe79cc4c6d866956.fontdata"
 
 [deps]
 
-source_file="res://Assets/pzim3x5b.ttf"
-dest_files=["res://.godot/imported/pzim3x5b.ttf-4470c88be870428c958bdede88fa2330.fontdata"]
+source_file="res://DrowsyDoze/Assets/pzim3x5b.ttf"
+dest_files=["res://.godot/imported/pzim3x5b.ttf-ee7c5a3928e7a3abbe79cc4c6d866956.fontdata"]
 
 [params]
 

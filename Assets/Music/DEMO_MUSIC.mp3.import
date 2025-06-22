@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://bwpaayjlt85pp"
-path="res://.godot/imported/DEMO_MUSIC.mp3-b13f61ccbdd63d00aa0e5ee9bdece62d.mp3str"
+path="res://.godot/imported/DEMO_MUSIC.mp3-329dc2dc78332b64800fe4ab87d610bf.mp3str"
 
 [deps]
 
-source_file="res://Assets/Music/DEMO_MUSIC.mp3"
-dest_files=["res://.godot/imported/DEMO_MUSIC.mp3-b13f61ccbdd63d00aa0e5ee9bdece62d.mp3str"]
+source_file="res://DrowsyDoze/Assets/Music/DEMO_MUSIC.mp3"
+dest_files=["res://.godot/imported/DEMO_MUSIC.mp3-329dc2dc78332b64800fe4ab87d610bf.mp3str"]
 
 [params]
 

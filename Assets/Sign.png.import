@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dudlklsf8ybxp"
-path="res://.godot/imported/Sign.png-6900ec36eeeec7d96aada7e693625975.ctex"
+path="res://.godot/imported/Sign.png-7e423e779359927ba80b23576a9e5640.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sign.png"
-dest_files=["res://.godot/imported/Sign.png-6900ec36eeeec7d96aada7e693625975.ctex"]
+source_file="res://DrowsyDoze/Assets/Sign.png"
+dest_files=["res://.godot/imported/Sign.png-7e423e779359927ba80b23576a9e5640.ctex"]
 
 [params]
 

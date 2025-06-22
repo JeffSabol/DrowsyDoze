@@ -1,6 +1,6 @@
 extends Node2D
 
-var drifting_z_scene = preload("res://Scenes/DriftingZ.tscn")
+var drifting_z_scene = preload("res://DrowsyDoze/Scenes/DriftingZ.tscn")
 
 func drift_and_fade():
 	call_deferred("_do_drift_and_fade")  # Waits one frame so position is valid
